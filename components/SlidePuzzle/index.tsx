@@ -1,4 +1,5 @@
-import { CSSProperties } from 'react'
+import { Pieces } from './Pieces'
+import { Grid } from './types'
 
 interface SlidePuzzleProps {
   imageURL: string;
@@ -6,6 +7,14 @@ interface SlidePuzzleProps {
 }
 
 export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
+  const grid: Grid = Array.from(Array(size).keys()).map((top) =>
+    Array.from(Array(size).keys()).map((left) => ({
+      top,
+      left,
+      visible: top + left + 2 !== size * 2,
+    })),
+  );
+
   return (
     <div
       style={{
@@ -13,27 +22,7 @@ export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
         maxWidth: "90%",
       }}
     >
-      {Array.from(Array(size).keys()).map((i) => (
-        <div className="row">
-          {Array.from(Array(size).keys()).map((_, j) => {
-            return <img src={imageURL} style={getPieceStyle(i, j, size)} />;
-          })}
-        </div>
-      ))}
+      <Pieces grid={grid} imageURL={imageURL} />
     </div>
   );
-};
-
-const getPieceStyle = (i: number, j: number, n: number): CSSProperties => {
-  const marginPercentage = 0.2;
-  return {
-    clipPath: `inset(${(i * 100) / n + marginPercentage}% ${
-      (j * 100) / n + marginPercentage
-    }% ${((n - 1 - i) * 100) / n + marginPercentage}% ${
-      ((n - 1 - j) * 100) / n + marginPercentage
-    }%)`,
-    position: "absolute",
-    margin: "5px",
-    width: "100%",
-  };
 };
