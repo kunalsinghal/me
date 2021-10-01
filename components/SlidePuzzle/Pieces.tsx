@@ -1,5 +1,4 @@
-import { CSSProperties } from 'react'
-
+import styles from './pieces.module.css'
 import { Grid, Tile } from './types'
 
 interface PiecesProps {
@@ -13,7 +12,13 @@ export const Pieces = ({ imageURL, grid }: PiecesProps) => {
   return (
     <>
       {grid.map((row, y) => (
-        <div className="row" key={y}>
+        <div
+          key={y}
+          style={{
+            display: "flex",
+            margin: 0,
+          }}
+        >
           {row.map((tile, x) => (
             <Piece
               imageURL={imageURL}
@@ -45,28 +50,34 @@ const Piece = ({
   size,
   tile: { left, top, visible },
 }: PieceProps) => {
-  const marginPercentage = 0.2;
   const factor = 100 / size;
 
   return (
-    <img
-      src={imageURL}
+    <div
       style={{
-        clipPath: `inset(${top * factor + marginPercentage}% ${
-          (size - 1 - left) * factor + marginPercentage
-        }% ${(size - 1 - top) * factor + marginPercentage}% ${
-          left * factor + marginPercentage
-        }%)`,
-        transform: `translate(${(x - left) * factor}%, ${(y - top) * factor}%)`,
-        position: "absolute",
-        margin: "5px",
-        width: "100%",
-        display: visible ? undefined : "none",
+        display: "inline-block",
+        margin: "4px 5px",
       }}
-      key={x}
-      data-x={x}
-      data-y={y}
-      data-tile={`${left}:${top}`}
-    />
+      className={visible ? styles.piece : undefined}
+    >
+      <img
+        src={imageURL}
+        style={{
+          clipPath: `inset(${top * factor}% ${(size - 1 - left) * factor}% ${
+            (size - 1 - top) * factor
+          }% ${left * factor}%)`,
+          transformOrigin: "top left",
+          transform: `scale(${size}) translate(${-left * factor}%, ${
+            -top * factor
+          }%)`,
+          width: "100%",
+          opacity: visible ? 1 : 0,
+        }}
+        key={x}
+        data-x={x}
+        data-y={y}
+        data-tile={`${left}:${top}`}
+      />
+    </div>
   );
 };
