@@ -4,7 +4,7 @@ import { SlidePuzzle } from 'components/SlidePuzzle'
 export default function HappyBirthday() {
   return (
     <Page>
-      <SlidePuzzle imageURL="/puzzle1.jpg" />
+      <SlidePuzzle imageURL="/puzzle1.jpg" size={4} />
     </Page>
   );
 }
