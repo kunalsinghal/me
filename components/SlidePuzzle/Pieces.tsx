@@ -4,9 +4,10 @@ import { Grid, Tile } from './types'
 interface PiecesProps {
   imageURL: string;
   grid: Grid;
+  onTileClick(x: number, y: number): void;
 }
 
-export const Pieces = ({ imageURL, grid }: PiecesProps) => {
+export const Pieces = ({ imageURL, grid, onTileClick }: PiecesProps) => {
   const size = grid.length;
 
   return (
@@ -27,6 +28,7 @@ export const Pieces = ({ imageURL, grid }: PiecesProps) => {
               y={y}
               tile={tile}
               size={size}
+              onClick={() => onTileClick(x, y)}
             />
           ))}
         </div>
@@ -41,6 +43,7 @@ interface PieceProps {
   size: number;
   tile: Tile;
   imageURL: string;
+  onClick(): void;
 }
 
 const Piece = ({
@@ -49,6 +52,7 @@ const Piece = ({
   y,
   size,
   tile: { left, top, visible },
+  onClick,
 }: PieceProps) => {
   const factor = 100 / size;
 
@@ -59,6 +63,7 @@ const Piece = ({
         margin: "4px 5px",
       }}
       className={visible ? styles.piece : undefined}
+      onClick={onClick}
     >
       <img
         src={imageURL}

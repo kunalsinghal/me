@@ -1,3 +1,6 @@
+import React from 'react'
+
+import { defaultGrid, selectTileInGrid } from './grid'
 import { Pieces } from './Pieces'
 import { Grid } from './types'
 
@@ -7,13 +10,7 @@ interface SlidePuzzleProps {
 }
 
 export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
-  const grid: Grid = Array.from(Array(size).keys()).map((top) =>
-    Array.from(Array(size).keys()).map((left) => ({
-      top,
-      left,
-      visible: top + left + 2 !== size * 2,
-    })),
-  );
+  const [grid, setGrid] = React.useState<Grid>(defaultGrid(size));
 
   return (
     <div
@@ -22,7 +19,11 @@ export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
         maxWidth: "90%",
       }}
     >
-      <Pieces grid={grid} imageURL={imageURL} />
+      <Pieces
+        grid={grid}
+        imageURL={imageURL}
+        onTileClick={selectTileInGrid(grid, setGrid)}
+      />
     </div>
   );
 };

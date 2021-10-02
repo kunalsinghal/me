@@ -5,3 +5,8 @@ export interface Tile {
   top: number;
   visible: boolean;
 }
+
+export interface Position {
+  x: number;
+  y: number;
+}
