@@ -1,3 +1,5 @@
+import { flippedGrid } from 'components/SlidePuzzle/grid'
+
 import styles from './pieces.module.css'
 import { Grid, Tile } from './types'
 
@@ -10,25 +12,27 @@ interface PiecesProps {
 export const Pieces = ({ imageURL, grid, onTileClick }: PiecesProps) => {
   const size = grid.length;
 
+  const flipped = flippedGrid(grid);
+
   return (
     <>
-      {grid.map((row, y) => (
+      {flipped.map((row, top) => (
         <div
-          key={y}
+          key={top}
           style={{
             display: "flex",
             margin: 0,
           }}
         >
-          {row.map((tile, x) => (
+          {row.map((tile, left) => (
             <Piece
               imageURL={imageURL}
-              key={x}
-              x={x}
-              y={y}
-              tile={tile}
+              key={left}
+              x={tile.left}
+              y={tile.top}
+              tile={{ top, left, visible: tile.visible }}
               size={size}
-              onClick={() => onTileClick(x, y)}
+              onClick={() => onTileClick(tile.left, tile.top)}
             />
           ))}
         </div>
@@ -60,7 +64,9 @@ const Piece = ({
     <div
       style={{
         display: "inline-block",
-        margin: "4px 5px",
+        padding: "4px 5px",
+        transform: `translate(${(x - left) * 100}%, ${(y - top) * 100}%)`,
+        transition: "transform 0.3s",
       }}
       className={visible ? styles.piece : undefined}
       onClick={onClick}

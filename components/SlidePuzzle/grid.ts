@@ -9,9 +9,25 @@ export const defaultGrid = (size: number): Grid =>
     })),
   );
 
+export const flippedGrid = (grid: Grid) => {
+  const size = grid.length;
+  const flipped = defaultGrid(size);
+  grid.forEach((row, y) =>
+    row.forEach((tile, x) => {
+      flipped[tile.top][tile.left] = {
+        top: y,
+        left: x,
+        visible: tile.visible,
+      };
+    }),
+  );
+  return flipped;
+};
+
 export const selectTileInGrid =
   (grid: Grid, setGrid: (_: Grid) => void) => (x: number, y: number) => {
     const pos = { x, y };
+    console.log(pos, grid);
     setGrid(
       fillSpot(pos, { x: x - 1, y }, grid) ??
         fillSpot(pos, { x: x + 1, y }, grid) ??
