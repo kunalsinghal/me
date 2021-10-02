@@ -27,7 +27,7 @@ export const flippedGrid = (grid: Grid) => {
 export const selectTileInGrid =
   (grid: Grid, setGrid: (_: Grid) => void) => (x: number, y: number) => {
     const pos = { x, y };
-    console.log(pos, grid);
+
     setGrid(
       fillSpot(pos, { x: x - 1, y }, grid) ??
         fillSpot(pos, { x: x + 1, y }, grid) ??
@@ -54,4 +54,21 @@ const fillSpot = (pos: Position, spot: Position, grid: Grid) => {
       }
     }),
   );
+};
+
+export const isSolved = (grid: Grid) =>
+  !grid.some((row, top) =>
+    row.some((tile, left) => tile.top !== top || tile.left !== left),
+  );
+
+export const randomizeGrid = (grid: Grid) => {
+  let randomizedGrid = grid;
+  const size = grid.length;
+  for (let i = 0; i < 10000; i++) {
+    Math.random();
+    selectTileInGrid(randomizedGrid, (g) => {
+      randomizedGrid = g;
+    })(Math.floor(Math.random() * size), Math.floor(Math.random() * size));
+  }
+  return randomizedGrid;
 };

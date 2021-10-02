@@ -1,5 +1,6 @@
-import { flippedGrid } from 'components/SlidePuzzle/grid'
+import React from 'react'
 
+import { flippedGrid } from './grid'
 import styles from './pieces.module.css'
 import { Grid, Tile } from './types'
 
@@ -71,6 +72,7 @@ const Piece = ({
       className={visible ? styles.piece : undefined}
       onClick={onClick}
     >
+      {visible && <div className={styles.hint}>{top * size + left + 1}</div>}
       <img
         src={imageURL}
         style={{

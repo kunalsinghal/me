@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { defaultGrid, selectTileInGrid } from './grid'
+import { defaultGrid, isSolved, randomizeGrid, selectTileInGrid } from './grid'
 import { Pieces } from './Pieces'
 import { Grid } from './types'
 
@@ -11,6 +11,14 @@ interface SlidePuzzleProps {
 
 export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
   const [grid, setGrid] = React.useState<Grid>(defaultGrid(size));
+
+  React.useEffect(() => {
+    setGrid(randomizeGrid(grid));
+  }, []);
+
+  React.useEffect(() => {
+    console.log("isSolved", isSolved(grid));
+  }, [grid]);
 
   return (
     <div
