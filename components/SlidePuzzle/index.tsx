@@ -11,14 +11,21 @@ interface SlidePuzzleProps {
 
 export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
   const [grid, setGrid] = React.useState<Grid>(defaultGrid(size));
+  const [solved, setSolved] = React.useState<boolean | undefined>(undefined);
 
   React.useEffect(() => {
     setGrid(randomizeGrid(grid));
   }, []);
 
   React.useEffect(() => {
-    console.log("isSolved", isSolved(grid));
+    const newSolved = isSolved(grid);
+    if (!newSolved) setSolved(false);
+    else if (solved === false) setSolved(true);
   }, [grid]);
+
+  React.useEffect(() => {
+    console.log(solved);
+  }, [solved]);
 
   return (
     <div
