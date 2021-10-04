@@ -2,6 +2,8 @@ import { Button } from 'components/Button'
 import { SlidePuzzle } from 'components/SlidePuzzle'
 import React from 'react'
 
+import styles from './birthday-puzzles.module.css'
+
 export const BirthdayPuzzles = () => {
   const [stage, setStage] = React.useState(0);
 
@@ -33,5 +35,15 @@ const IntroPage = (props: { setState(x: number): void }) => {
 };
 
 const PuzzlePage: React.FC<{ stage: number }> = () => {
-  return <SlidePuzzle imageURL="puzzle1.jpg" />;
+  return (
+    <div className={styles.puzzleContainer}>
+      <div className={styles.description}>
+        Wait you got to scratch your head a bit first!
+        <br />
+        <br />
+        This moment lasted only a second and yet we have it forever...
+      </div>
+      <SlidePuzzle imageURL="puzzle1.jpg" />
+    </div>
+  );
 };

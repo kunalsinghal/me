@@ -1,0 +1,12 @@
+.puzzleContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.description {
+  width: 100%;
+  color: darkslategray;
+  font-size: 1.4em;
+}

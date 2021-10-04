@@ -27,11 +27,34 @@ export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
     console.log(solved);
   }, [solved]);
 
+  const [hint, setHint] = React.useState(false);
+
   return (
-    <Pieces
-      grid={grid}
-      imageURL={imageURL}
-      onTileClick={selectTileInGrid(grid, setGrid)}
-    />
+    <div>
+      <Pieces
+        grid={grid}
+        imageURL={imageURL}
+        onTileClick={selectTileInGrid(grid, setGrid)}
+        hint={hint}
+      />
+      <div
+        style={{
+          marginTop: "12px",
+          display: "flex",
+          fontSize: "1.2em",
+          alignItems: "center",
+        }}
+        onClick={() => setHint(!hint)}
+      >
+        <input
+          type="checkbox"
+          style={{
+            margin: "0 8px",
+          }}
+          checked={hint}
+        />
+        <div>Show hints</div>
+      </div>
+    </div>
   );
 };

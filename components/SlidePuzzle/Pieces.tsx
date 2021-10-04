@@ -8,9 +8,10 @@ interface PiecesProps {
   imageURL: string;
   grid: Grid;
   onTileClick(x: number, y: number): void;
+  hint: boolean;
 }
 
-export const Pieces = ({ imageURL, grid, onTileClick }: PiecesProps) => {
+export const Pieces = ({ imageURL, grid, onTileClick, hint }: PiecesProps) => {
   const size = grid.length;
 
   const flipped = flippedGrid(grid);
@@ -34,6 +35,7 @@ export const Pieces = ({ imageURL, grid, onTileClick }: PiecesProps) => {
               tile={{ top, left, visible: tile.visible }}
               size={size}
               onClick={() => onTileClick(tile.left, tile.top)}
+              hint={hint}
             />
           ))}
         </div>
@@ -49,6 +51,7 @@ interface PieceProps {
   tile: Tile;
   imageURL: string;
   onClick(): void;
+  hint: boolean;
 }
 
 const Piece = ({
@@ -58,6 +61,7 @@ const Piece = ({
   size,
   tile: { left, top, visible },
   onClick,
+  hint,
 }: PieceProps) => {
   const factor = 100 / size;
 
@@ -72,7 +76,9 @@ const Piece = ({
       className={visible ? styles.piece : undefined}
       onClick={onClick}
     >
-      {visible && <div className={styles.hint}>{top * size + left + 1}</div>}
+      {hint && visible && (
+        <div className={styles.hint}>{top * size + left + 1}</div>
+      )}
       <img
         src={imageURL}
         style={{
