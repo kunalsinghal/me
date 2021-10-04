@@ -51,8 +51,10 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
   }, []);
 
   const onSolve = () => {
-    localStorage.setItem("puzzle_completed", JSON.stringify(stage));
+    if (!canSkip)
+      localStorage.setItem("puzzle_completed", JSON.stringify(stage));
     setStage(stage + 1);
+    window.scrollTo(0, 0);
   };
 
   switch (stage) {
@@ -85,7 +87,35 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
             onSolve={onSolve}
             key={stage}
             canSkip={canSkip}
+            size={3}
           />
+        </div>
+      );
+
+    default:
+      return (
+        <div className={styles.puzzleContainer}>
+          <div className={styles.description}>
+            A very happy birthday my dearest. See you super soon! Miss you
+            loads.
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+            }}
+          >
+            {["puzzle1.jpg", "puzzle2.jpg"].map((url) => (
+              <img
+                src={url}
+                style={{
+                  width: "100%",
+                  marginBottom: "20px",
+                }}
+              />
+            ))}
+          </div>
         </div>
       );
   }
