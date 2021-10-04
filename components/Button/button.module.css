@@ -1,0 +1,10 @@
+.button {
+  background-color: cadetblue;
+  color: azure;
+  padding: 8px 16px;
+  border-radius: 16px;
+}
+.button:hover {
+  opacity: 0.75;
+  cursor: pointer;
+}
