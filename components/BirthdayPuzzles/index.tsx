@@ -68,7 +68,7 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
             This moment lasted only a second and yet we have it forever...
           </div>
           <SlidePuzzle
-            imageURL="puzzle1.jpg"
+            imageURL="dance_dip.jpg"
             size={2}
             onSolve={onSolve}
             key={stage}
@@ -79,15 +79,41 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
     case 2:
       return (
         <div className={styles.puzzleContainer}>
+          <div className={styles.description}>Some tough love!</div>
+          <SlidePuzzle
+            imageURL="thappad.jpg"
+            size={3}
+            onSolve={onSolve}
+            key={stage}
+            canSkip={canSkip}
+          />
+        </div>
+      );
+    case 3:
+      return (
+        <div className={styles.puzzleContainer}>
           <div className={styles.description}>
             You were so ready to get married then!
           </div>
           <SlidePuzzle
-            imageURL="puzzle2.jpg"
+            imageURL="bhaagi_mahima.jpg"
             onSolve={onSolve}
             key={stage}
             canSkip={canSkip}
             size={3}
+          />
+        </div>
+      );
+    case 4:
+      return (
+        <div className={styles.puzzleContainer}>
+          <div className={styles.description}>And then we saw Buddha!</div>
+          <SlidePuzzle
+            imageURL="buddha.jpg"
+            onSolve={onSolve}
+            key={stage}
+            canSkip={canSkip}
+            size={4}
           />
         </div>
       );
@@ -96,7 +122,7 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
       return (
         <div className={styles.puzzleContainer}>
           <div className={styles.description}>
-            A very happy birthday my dearest. See you super soon! Miss you
+            A very happy birthday my dearest. Jaldi se milte hai! Miss you
             loads.
           </div>
           <div
@@ -106,7 +132,12 @@ const PuzzlePage: React.FC<{ stage: number; setStage(x: number): void }> = ({
               width: "100%",
             }}
           >
-            {["puzzle1.jpg", "puzzle2.jpg"].map((url) => (
+            {[
+              "dance_dip.jpg",
+              "thappad.jpg",
+              "bhaagi_mahima.jpg",
+              "buddha.jpg",
+            ].map((url) => (
               <img
                 src={url}
                 style={{
