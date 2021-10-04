@@ -24,6 +24,7 @@ export const Pieces = ({ imageURL, grid, onTileClick, hint }: PiecesProps) => {
           style={{
             display: "flex",
             margin: 0,
+            width: "100%",
           }}
         >
           {row.map((tile, left) => (
