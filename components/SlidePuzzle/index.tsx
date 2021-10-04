@@ -98,7 +98,7 @@ export const SlidePuzzle = ({
             <div>Show hints</div>
           </div>
         )}
-        {canSkip && (
+        {canSkip && !solved && (
           <div
             style={{
               marginTop: "12px",
@@ -108,7 +108,7 @@ export const SlidePuzzle = ({
             }}
           >
             <div style={{ marginRight: "12px" }}>Solved Already!</div>
-            <Button onClick={onSolve}>Skip</Button>
+            <Button onClick={() => setSolved(true)}>Skip</Button>
           </div>
         )}
       </div>
