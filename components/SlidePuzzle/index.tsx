@@ -28,17 +28,10 @@ export const SlidePuzzle = ({ imageURL, size = 3 }: SlidePuzzleProps) => {
   }, [solved]);
 
   return (
-    <div
-      style={{
-        height: "80%",
-        maxWidth: "90%",
-      }}
-    >
-      <Pieces
-        grid={grid}
-        imageURL={imageURL}
-        onTileClick={selectTileInGrid(grid, setGrid)}
-      />
-    </div>
+    <Pieces
+      grid={grid}
+      imageURL={imageURL}
+      onTileClick={selectTileInGrid(grid, setGrid)}
+    />
   );
 };
